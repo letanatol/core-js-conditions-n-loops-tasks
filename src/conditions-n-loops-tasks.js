@@ -264,8 +264,92 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let stringResult = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '.':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'point';
+        break;
+      case ',':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'point';
+        break;
+      case '-':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'minus';
+        break;
+      case '0':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'zero';
+        break;
+      case '1':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'one';
+        break;
+      case '2':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'two';
+        break;
+      case '3':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'three';
+        break;
+      case '4':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'four';
+        break;
+      case '5':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'five';
+        break;
+      case '6':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'six';
+        break;
+      case '7':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'seven';
+        break;
+      case '8':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'eight';
+        break;
+      case '9':
+        if (stringResult.length > 0) {
+          stringResult += ' ';
+        }
+        stringResult += 'nine';
+        break;
+      default:
+    }
+  }
+  return stringResult;
 }
 
 /**
