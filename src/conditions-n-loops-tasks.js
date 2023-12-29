@@ -12,6 +12,8 @@
 /**
  * Determines whether a given number is positive. Zero is considered positive.
  * This function does not use Number or Math class methods.
+ * Определяет, является ли данное число положительным. Ноль считается положительным.
+ * Эта функция не использует методы Number или Math class.
  *
  * @param {number} number - The number to check.
  * @return {boolean} True if the number is positive or zero, false otherwise.
@@ -21,8 +23,9 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) return true;
+  return false;
 }
 
 /**
