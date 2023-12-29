@@ -455,6 +455,9 @@ function getBalanceIndex(arr) {
  * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
  * The direction of filling with numbers is clockwise.
  * Usage of String and Array classes methods is not allowed in this task.
+ * Генерирует спиральную матрицу заданного размера, заполненную числами в порядке возрастания, начинающимися от одного.
+ * Направление заполнения числами по часовой стрелке.
+ * Использование методов классов String и Array в этой задаче запрещено
  *
  * @param {number} size - The size of the matrix.
  * @return {number[][]} The spiral matrix.
@@ -472,8 +475,50 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+    for (let k = 0; k < size; k += 1) {
+      matrix[i][k] = 0;
+    }
+  }
+
+  let row = 0;
+  let col = -1;
+  let driveRow = 0;
+  let driveCol = 1;
+  let x = 1;
+
+  while (x <= size ** 2) {
+    if (
+      driveRow + row >= 0 &&
+      driveRow + row < size &&
+      driveCol + col >= 0 &&
+      driveCol + col < size &&
+      matrix[driveRow + row][driveCol + col] === 0
+    ) {
+      row += driveRow;
+      col += driveCol;
+      matrix[row][col] = x;
+      x += 1;
+    } else if (driveRow === 1) {
+      driveRow = 0;
+      driveCol = -1;
+    } else if (driveCol === 1) {
+      driveCol = 0;
+      driveRow = 1;
+    } else if (driveRow === -1) {
+      driveRow = 0;
+      driveCol = 1;
+    } else if (driveCol === -1) {
+      driveCol = 0;
+      driveRow = -1;
+    }
+  }
+
+  return matrix;
 }
 
 /**
