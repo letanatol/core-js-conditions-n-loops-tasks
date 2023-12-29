@@ -525,6 +525,9 @@ function getSpiralMatrix(size) {
  * Rotates a matrix by 90 degrees clockwise in place.
  * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
  * Usage of String and Array class methods is not allowed in this task.
+ * Поворачивает матрицу на 90 градусов по часовой стрелке.
+ * Учтите, что размер матрицы может быть очень большим. Подумайте, как можно оптимизировать решение.
+ * Использование методов класса String и Array в этой задаче запрещено.
  *
  * @param {number[][]} matrix - The matrix to rotate.
  * @return {number[][]} The rotated matrix.
@@ -536,8 +539,31 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const copyMatrix = matrix;
+
+  for (let i = 0; i < copyMatrix.length; i += 1) {
+    for (let j = i + 1; j < matrix.length; j += 1) {
+      const temp = copyMatrix[i][j];
+      copyMatrix[i][j] = copyMatrix[j][i];
+      copyMatrix[j][i] = temp;
+    }
+  }
+  for (let i = 0; i < copyMatrix.length; i += 1) {
+    let leftCol = 0;
+    let rightCol = copyMatrix.length - 1;
+
+    while (leftCol < rightCol) {
+      const temp = copyMatrix[i][leftCol];
+      copyMatrix[i][leftCol] = copyMatrix[i][rightCol];
+      copyMatrix[i][rightCol] = temp;
+
+      leftCol += 1;
+      rightCol -= 1;
+    }
+  }
+
+  return copyMatrix;
 }
 
 /**
