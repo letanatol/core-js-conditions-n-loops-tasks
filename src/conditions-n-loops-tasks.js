@@ -572,7 +572,12 @@ function rotateMatrix(matrix) {
  * Take into account that the array can be very large. Consider how you can optimize your solution.
  * In this task, the use of methods of the Array and String classes is not allowed.
  *
- * @param {number[]} arr - The array to sort.
+ * Сортирует массив чисел в порядке возрастания на месте.
+ * Используйте любой алгоритм сортировки по вашему выбору.
+ * Учтите, что массив может быть очень большим. Подумайте, как можно оптимизировать решение.
+ * В этой задаче использование методов классов Array и String запрещено.
+ *
+ * @param {number[]} array - The array to sort.
  * @return {number[]} The sorted array.
  *
  * @example:
@@ -580,10 +585,50 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
-}
+function mergeSort(array, leftArray, rightArray) {
+  const arrayCopy = array;
+  let indexLeft = 0;
+  let indexRight = 0;
+  let indexArrayCopy = 0;
 
+  while (indexLeft < leftArray.length && indexRight < rightArray.length) {
+    if (leftArray[indexLeft] < rightArray[indexRight]) {
+      arrayCopy[indexArrayCopy] = leftArray[indexLeft];
+      indexLeft += 1;
+    } else {
+      arrayCopy[indexArrayCopy] = rightArray[indexRight];
+      indexRight += 1;
+    }
+    indexArrayCopy += 1;
+  }
+
+  while (indexLeft < leftArray.length) {
+    arrayCopy[indexArrayCopy] = leftArray[indexLeft];
+    indexLeft += 1;
+    indexArrayCopy += 1;
+  }
+
+  while (indexRight < rightArray.length) {
+    arrayCopy[indexArrayCopy] = rightArray[indexRight];
+    indexRight += 1;
+    indexArrayCopy += 1;
+  }
+}
+function splitArrays(array) {
+  if (array.length > 1) {
+    const middle = Math.floor(array.length / 2);
+    const leftArray = array.slice(0, middle);
+    const rightArray = array.slice(middle);
+
+    splitArrays(leftArray);
+    splitArrays(rightArray);
+
+    mergeSort(array, leftArray, rightArray);
+  }
+}
+function sortByAsc(array) {
+  splitArrays(array);
+}
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
  * Take into account that the string can be very long and the number of iterations is large. Consider how you can optimize your solution.
