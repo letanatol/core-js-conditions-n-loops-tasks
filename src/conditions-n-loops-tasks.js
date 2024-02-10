@@ -678,6 +678,9 @@ function shuffleChar(str, iterations) {
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
  * Usage of String class methods is not allowed in this task.
+ * Возвращает ближайшее наибольшее целое число, состоящее из цифр данного положительного целого числа.
+ * Если такого числа нет, он возвращает исходное число.
+ * Использование методов класса String в этой задаче запрещено.
  *
  * @example:
  * 12345    => 12354
@@ -691,8 +694,48 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getIndex(arrayNumbers, index) {
+  let nextIndex = index + 1;
+  for (let i = index + 2; i < arrayNumbers.length; i += 1) {
+    if (
+      arrayNumbers[i] > arrayNumbers[index] &&
+      arrayNumbers[i] < arrayNumbers[nextIndex]
+    ) {
+      nextIndex = i;
+    }
+  }
+  return nextIndex;
+}
+
+function getNearestBigger(number) {
+  let num = number;
+  const arrayNumbers = [];
+  while (num > 0) {
+    arrayNumbers.unshift(num % 10);
+    num = Math.floor(num / 10);
+  }
+
+  let index = arrayNumbers.length - 2;
+  while (index >= 0 && arrayNumbers[index] >= arrayNumbers[index + 1]) {
+    index -= 1;
+  }
+
+  if (index === -1) {
+    return number;
+  }
+
+  const nextIndex = getIndex(arrayNumbers, index);
+
+  const temp = arrayNumbers[index];
+  arrayNumbers[index] = arrayNumbers[nextIndex];
+  arrayNumbers[nextIndex] = temp;
+
+  const arrayNumbersOther = arrayNumbers.splice(index + 1);
+  arrayNumbersOther.sort((a, b) => a - b);
+
+  const result = Number([...arrayNumbers, ...arrayNumbersOther].join(''));
+
+  return result;
 }
 
 module.exports = {
